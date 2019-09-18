@@ -1,5 +1,5 @@
 import React from 'react';
-import BookCard from './BookCard';
+import BookCardContainer from './BookCardContainer';
 import SearchBar from './SearchBar'
 import './App.css';
 
@@ -9,7 +9,7 @@ function App() {
       <header><h1>A Simple Book Finder</h1></header>
       <body>
         <SearchBar />
-        <BookCard />
+        <BookCardContainer />
       </body>
     </div>
   );
