@@ -38,7 +38,9 @@ class SearchBar extends React.Component {
         booksData: [],
         totalItems: "",
         query: "",
-        isLoading: false
+        isLoading: false,
+        totalPages: 0,
+        currentPageNo: 0
     }
 
     //fetch google books data when submitting search form
@@ -46,12 +48,17 @@ class SearchBar extends React.Component {
         //My unique API key, no authentication needed. 
         //This key is only allowed for Google Books API.
         const ApiKey = 'AIzaSyAXJai7q64-kw03ojn8H2XVm8AOoTiUrqM';
-        let query = this.state.query.split(" ").join("+")
-        let booksURL = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${ApiKey}`;
+        let query = this.state.query.split(" ").join("+");
+        //for the use of pagination
+        let startIndex = 0
+        let maxResults = 20; //max allowed results in api
+        //TODO: each new page, run fetchData() again, change startIndex=maxResults+1
+        let booksURL = `https://www.googleapis.com/books/v1/volumes?q=${query}&startIndex=${startIndex}&maxResults=${maxResults}&key=${ApiKey}&max-result=40`;
+        console.log(booksURL)
         async function getData() {
             try {
                 const response = await fetch(booksURL);
-                // console.log(response)
+                console.log(response)
                 if (!response.ok) {
                     throw new Error('Network response was not ok.');
                 } else {
@@ -64,13 +71,25 @@ class SearchBar extends React.Component {
         }
         getData()
             .then(data => {
+                //convert into number, get total number of search results
+                const totalResults = Number(data.totalItems)
+                const totalPagesCount = this.getPagesCount(totalResults, 20)
                 this.setState({
                     //send books information to state
                     booksData: data.items,
-                    totalItems: data.totalItems,
-                    isLoading: false
+                    totalItems: totalResults,
+                    isLoading: false,
+                    totalPages: totalPagesCount,
                 })
+                console.log(totalPagesCount)
             })
+    }
+
+    //To display all results, need to get page count first
+    getPagesCount = (total, denominator) => {
+        const divisible = total % denominator === 0;
+        const valueToBeAdded = divisible ? 0 : 1;
+        return Math.floor(total / denominator) + valueToBeAdded;
     }
 
     handleChange = name => event => {
@@ -85,7 +104,6 @@ class SearchBar extends React.Component {
         if (this.state.query !== "") {
             this.setState({ isLoading: true })
             this.fetchData()
-            console.log(this.props.location)
         }
     }
 
@@ -100,7 +118,7 @@ class SearchBar extends React.Component {
             if (this.state.totalItems === 0) {
                 notice = <Typography variant="h3">No books found.</Typography>
             } else if (this.state.totalItems !== "" || 0) {
-                notice = <Typography variant="h4">{this.state.totalItems} results. Displaying the first 10 results.</Typography>
+                notice = <Typography variant="h4">{this.state.totalItems} results. Displaying the first 40 results.</Typography>
             }
         }
 
@@ -137,8 +155,17 @@ class SearchBar extends React.Component {
                             :
                             ""
                     }
-                </div>
 
+                </div>
+                <Grid item xs={6}>
+                    {
+                        this.state.totalPages >= 1 ?
+                            //TODO: add page button
+                            <Button variant="primary">Page 1</Button>
+                            :
+                            ""
+                    }
+                </Grid>
             </Grid>
         )
     }

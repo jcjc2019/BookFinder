@@ -63,7 +63,7 @@ class BookCard extends React.Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.props.book.volumeInfo)
+        // console.log(this.props.book.volumeInfo)
         return (
             <div>
                 <Grid item xs={6} sm={3}>
@@ -76,9 +76,9 @@ class BookCard extends React.Component {
                                 <img src={NotAvailableImage} alt="cover" height="200px" width="150px"></img>
                             }
 
-                            <Typography variant="h6">Title: {this.props.book.volumeInfo.title}</Typography>
-                            <Typography variant="subtitle1"></Typography><Typography>Authors: {this.props.book.volumeInfo.authors !== undefined ? this.props.book.volumeInfo.authors.join(", ") : "Unknown"}</Typography>
-                            <Typography>Publisher: {this.props.book.volumeInfo.publisher}</Typography>
+                            <Typography variant="h6">{this.props.book.volumeInfo.title}</Typography>
+                            <Typography variant="subtitle1"></Typography><Typography>By: {this.props.book.volumeInfo.authors !== undefined ? this.props.book.volumeInfo.authors.join(", ") : "Unknown"}</Typography>
+                            <Typography>Published By: {this.props.book.volumeInfo.publisher}</Typography>
                             <Typography>Published Date: {this.props.book.volumeInfo.publishedDate !== undefined ? this.props.book.volumeInfo.publishedDate : "Unknown"}</Typography>
                         </CardContent>
                         <CardActions disableSpacing>

@@ -22,7 +22,8 @@ class BookCardContainer extends React.Component {
                 {
                     this.props.books.map(
                         book => < BookCard book={book} />
-                    )}
+                    )
+                }
             </Grid>
         )
     }
