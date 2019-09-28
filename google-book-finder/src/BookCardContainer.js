@@ -1,13 +1,35 @@
 import React from 'react';
 import BookCard from './BookCard';
+import Grid from "@material-ui/core/Grid";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
-export default class BookCardContainer extends React.Component {
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    }
+});
+
+class BookCardContainer extends React.Component {
 
     render() {
+        const { classes } = this.props;
+        console.log(this.props)
         return (
-            <div>
-                <BookCard />
+            <div className={classes.root}>
+                <Grid container>
+                    {
+                        this.props.books.map(
+                            book => < BookCard book={book} />
+                        )}
+                </Grid>
             </div>
         )
     }
 }
+
+BookCardContainer.propTypes = {
+    classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(BookCardContainer);
