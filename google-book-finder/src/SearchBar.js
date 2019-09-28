@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Typography } from '@material-ui/core';
+import Grid from "@material-ui/core/Grid";
 
 
 const styles = theme => ({
@@ -47,12 +48,10 @@ class SearchBar extends React.Component {
         const ApiKey = 'AIzaSyAXJai7q64-kw03ojn8H2XVm8AOoTiUrqM';
         let query = this.state.query.split(" ").join("+")
         let booksURL = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${ApiKey}`;
-        console.log(query)
-        console.log(booksURL)
         async function getData() {
             try {
                 const response = await fetch(booksURL);
-                console.log(response)
+                // console.log(response)
                 if (!response.ok) {
                     throw new Error('Network response was not ok.');
                 } else {
@@ -86,7 +85,7 @@ class SearchBar extends React.Component {
         if (this.state.query !== "") {
             this.setState({ isLoading: true })
             this.fetchData()
-            console.log(this.state)
+            console.log(this.props.location)
         }
     }
 
@@ -106,23 +105,30 @@ class SearchBar extends React.Component {
         }
 
         return (
-            <div>
-                <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-                    <TextField
-                        id="search"
-                        label="Search for a book..."
-                        className={classes.textField}
-                        value={this.state.query}
-                        onChange={this.handleChange("query")}
-                        margin="normal"
-                        variant="outlined"
-                    />
-                    <br></br>
-                    <Button type="submit" variant="contained" size="medium" color="primary" className={classes.button}>
-                        Search
+            <Grid container
+                direction="row"
+                justify="center"
+                alignItems="center">
+                <Grid item xs={6}>
+                    <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+                        <TextField
+                            id="search"
+                            label="Search for a book..."
+                            className={classes.textField}
+                            value={this.state.query}
+                            onChange={this.handleChange("query")}
+                            margin="normal"
+                            variant="outlined"
+                        />
+                        <br></br>
+                        <Button type="submit" variant="contained" size="medium" color="primary" className={classes.button}>
+                            Search
                     </Button>
-                </form>
-                {notice}
+                    </form>
+                </Grid>
+                <p>
+                    {notice}
+                </p>
                 <div>
                     {
                         //Edge case: if no book data
@@ -133,7 +139,7 @@ class SearchBar extends React.Component {
                     }
                 </div>
 
-            </div>
+            </Grid>
         )
     }
 

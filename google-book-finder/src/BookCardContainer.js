@@ -16,14 +16,14 @@ class BookCardContainer extends React.Component {
         const { classes } = this.props;
         console.log(this.props)
         return (
-            <div className={classes.root}>
-                <Grid container>
-                    {
-                        this.props.books.map(
-                            book => < BookCard book={book} />
-                        )}
-                </Grid>
-            </div>
+            <Grid container
+                className={classes.root}
+                justify="space-evenly">
+                {
+                    this.props.books.map(
+                        book => < BookCard book={book} />
+                    )}
+            </Grid>
         )
     }
 }

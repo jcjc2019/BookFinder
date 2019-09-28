@@ -16,8 +16,10 @@ const styles = theme => ({
         flexGrow: 1,
     },
     card: {
-        minWidth: 400,
-        maxWidth: 400,
+        width: 400,
+        maxWidth: 500,
+        minHeight: 400,
+        maxHeight: 500,
         margin: 16,
         display: "flex",
         flexDirection: "column",
@@ -75,7 +77,7 @@ class BookCard extends React.Component {
                             }
 
                             <Typography variant="h6">Title: {this.props.book.volumeInfo.title}</Typography>
-                            <Typography variant="subtitle1"></Typography><Typography>Author: {this.props.book.volumeInfo.authors !== undefined ? this.props.book.volumeInfo.authors : "Unknown"}</Typography>
+                            <Typography variant="subtitle1"></Typography><Typography>Authors: {this.props.book.volumeInfo.authors !== undefined ? this.props.book.volumeInfo.authors.join(", ") : "Unknown"}</Typography>
                             <Typography>Publisher: {this.props.book.volumeInfo.publisher}</Typography>
                             <Typography>Published Date: {this.props.book.volumeInfo.publishedDate !== undefined ? this.props.book.volumeInfo.publishedDate : "Unknown"}</Typography>
                         </CardContent>
