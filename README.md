@@ -12,9 +12,9 @@ To check out the live version: click [here](https://jcjc2019.github.io/BookFinde
 
 ## Built with
 
-[React](https://reactjs.org/)
-[Google Books API](https://developers.google.com/books/)
-[Material UI](https://material-ui.com/)
+- [React](https://reactjs.org/)
+- [Google Books API](https://developers.google.com/books/)
+- [Material UI](https://material-ui.com/)
 
 ## Contributors
 Jing Chen
