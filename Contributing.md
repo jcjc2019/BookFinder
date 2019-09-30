@@ -19,6 +19,10 @@ Commit messages should be verb based, using the following pattern:
 
 - Pagination
 - Display latest 10 search queries.
-- Adding books to my shelf.
+- Adding books to my bookshelf.
 - Adding Google books authentication that allows users to log in and add books.
 - Automating tests by using Jest.
+
+### Note
+
+The last commit is not deployed since I still work on pagination. After pagination is done, I should deploy.

@@ -54,11 +54,10 @@ class SearchBar extends React.Component {
         let maxResults = 20; //max allowed results in api
         //TODO: each new page, run fetchData() again, change startIndex=maxResults+1
         let booksURL = `https://www.googleapis.com/books/v1/volumes?q=${query}&startIndex=${startIndex}&maxResults=${maxResults}&key=${ApiKey}&max-result=40`;
-        console.log(booksURL)
         async function getData() {
             try {
                 const response = await fetch(booksURL);
-                console.log(response)
+                // console.log(response)
                 if (!response.ok) {
                     throw new Error('Network response was not ok.');
                 } else {
@@ -81,7 +80,7 @@ class SearchBar extends React.Component {
                     isLoading: false,
                     totalPages: totalPagesCount,
                 })
-                console.log(totalPagesCount)
+                // console.log(totalPagesCount)
             })
     }
 
@@ -118,7 +117,7 @@ class SearchBar extends React.Component {
             if (this.state.totalItems === 0) {
                 notice = <Typography variant="h3">No books found.</Typography>
             } else if (this.state.totalItems !== "" || 0) {
-                notice = <Typography variant="h4">{this.state.totalItems} results. Displaying the first 40 results.</Typography>
+                notice = <Typography variant="h5">{this.state.totalItems} results. Displaying the first 20 results.</Typography>
             }
         }
 
