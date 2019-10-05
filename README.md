@@ -1,9 +1,8 @@
-# BookFinder
-A quick book finder via Google Books API.
+# BookFinder: A quick book finder via Google Books API.
 
-# Google Books Finder
+# Overview
 
-A quick and simple Google Books finder by using Google books API.
+This is a very quick and simple book finder by using Google books API.
 
 ## Getting started:
 
